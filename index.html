@@ -47,7 +47,8 @@
                 </span>
               </div>
             </summary>
-            <fieldset class="radioGroup">
+
+            <fieldset class="radioGroup" data-region="department-filters">
               <legend class="sr-only">Filter By Department</legend>
               <label class="radio" for="engineering">
                 <input type="radio" class="radio__input" value="engineering" id="engineering" name="department" />
@@ -68,7 +69,7 @@
                 </span>
               </div>
             </summary>
-            <fieldset class="radioGroup">
+            <fieldset class="radioGroup" data-region="location-filters">
               <legend class="sr-only">Filter By Location</legend>
               <label class="radio" for="boston">
                 <input type="radio" class="radio__input" value="boston" id="boston" name="location" />
@@ -89,7 +90,7 @@
                 </span>
               </div>
             </summary>
-            <fieldset class="checkboxes">
+            <fieldset class="checkboxes" data-region="year-filters">
               <legend class="sr-only">Filter By Years at Imarc</legend>
               <label class="checkbox" for="three">
                 <input type="checkbox" class="checkbox__input" value="three" id="three" name="department" />
@@ -99,7 +100,12 @@
           </details>
         </aside>
         <main class="content">
+          <h2 class="content__resultStatus sr-only" role="status">
+            50 Results Found
+          </h2>
+          <ul class="content__resultsList" data-region="results-list">
 
+          </ul>
         </main>
       </div>
     </div>

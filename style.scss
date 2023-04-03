@@ -194,3 +194,22 @@ details summary {
   gap: var(--size-3);
   grid-template-columns: max-content auto;
 }
+
+.content__resultsList {
+  display: grid;
+  gap: var(--size-4);
+  grid-template-columns: repeat(3, 1fr);
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.resultItem__image {
+  width: 100%;
+  aspect-ratio: 1;
+  margin-bottom: var(--size-2);
+}
+
+.resultItem__name {
+  font-size: 1.25rem;
+}
