@@ -8,6 +8,12 @@
     <title>A11Y Search Demo</title>
   </head>
   <body>
+    <svg style="display: none;">
+      <symbol id="search-icon" viewBox="0 0 24 24">
+        <path d="M0 0h24v24H0V0z" fill="none"/>
+        <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      </symbol>
+    </svg>
     <div id="app" class="search">
       <header class="hero">
         <h1>A11Y Search Demo</h1>
@@ -19,15 +25,16 @@
           <form class="search" role="search">
             <div class="search__wrapper">
               <div class="search__icon">
-                <span class="material-icons">
-                  search
-                </span>
+                <svg viewBox="0 0 24 24">
+                  <use href="#search-icon" />
+                </svg>
               </div>
               <input type="search" class="search__input" placeholder="Search the directory...">
             </div>
           </form>
         </header>
         <aside class="sidebar">
+
           <details open>
             <summary>
               <h3>Department</h3>
@@ -40,7 +47,7 @@
                 </span>
               </div>
             </summary>
-            <fieldset class="checkboxes">
+            <fieldset class="radioGroup">
               <legend class="sr-only">Filter By Department</legend>
               <label class="radio" for="engineering">
                 <input type="radio" class="radio__input" value="engineering" id="engineering" name="department" />
@@ -63,9 +70,9 @@
             </summary>
             <fieldset class="radioGroup">
               <legend class="sr-only">Filter By Location</legend>
-              <label class="radio" for="engineering">
-                <input type="radio" class="radio__input" value="engineering" id="engineering" name="location" />
-                <span>Engineering</span>
+              <label class="radio" for="boston">
+                <input type="radio" class="radio__input" value="boston" id="boston" name="location" />
+                <span>Boston</span>
               </label>
             </fieldset>
           </details>
@@ -84,9 +91,9 @@
             </summary>
             <fieldset class="checkboxes">
               <legend class="sr-only">Filter By Years at Imarc</legend>
-              <label class="checkbox" for="engineering">
-                <input type="checkbox" class="checkbox__input" value="engineering" id="engineering" name="department" />
-                <span>Engineering</span>
+              <label class="checkbox" for="three">
+                <input type="checkbox" class="checkbox__input" value="three" id="three" name="department" />
+                <span>3 Years</span>
               </label>
             </fieldset>
           </details>

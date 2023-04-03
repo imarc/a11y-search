@@ -12,6 +12,7 @@
     "vite": "^4.2.0"
   },
   "dependencies": {
-    "open-props": "^1.5.7"
+    "open-props": "^1.5.7",
+    "sass": "^1.60.0"
   }
 }

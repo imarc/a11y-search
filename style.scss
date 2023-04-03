@@ -1,8 +1,8 @@
 @import "open-props/style";
 
 /* optional imports that use the props */
-@import "open-props/normalize";
-@import "open-props/buttons";
+@import "open-props/normalize/light";
+@import "open-props/buttons/light";
 
 :root {
 
@@ -10,7 +10,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  accent-color: var(--cyan-8);
+  color-scheme: light;
   color: var(--text-2);
   background-color: var(--surface-1);
 
@@ -105,9 +106,8 @@ body {
 }
 
 .sidebar {
-  /* background: var(--surface-4); */
   display: grid;
-  gap: var(--size-4);
+  gap: var(--size-6);
   grid-column: 1 / span 1;
   grid-row: 2 / span 1;
 }
@@ -117,24 +117,34 @@ body {
   grid-row: 2 / span 1;
 }
 
+.search__wrapper {
+  align-items: center;
+  background: var(--surface-1);
+  border-radius: var(--radius-2);
+  border: var(--border-size-1) solid var(--gray-4);
+  display: grid;
+  gap: var(--size-2);
+  grid-template-columns: max-content auto;
+  padding: var(--size-2);
+}
+
+.search__icon {
+  height: auto;
+  width: var(--size-6);
+
+  svg {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+  }
+}
+
+.search__input {
+  background: var(--surface-1);
+}
+
 details {
-
-}
-
-details .detailsIcon__icon.-iconClosed {
-  opacity: 1;
-}
-
-details .detailsIcon__icon.-iconOpen {
-  opacity: 0;
-}
-
-details[open] .detailsIcon__icon.-iconClosed {
-  opacity: 0;
-}
-
-details[open] .detailsIcon__icon.-iconOpen {
-  opacity: 1;
+  box-shadow: var(--shadow-3);
 }
 
 details summary::-webkit-details-marker { display:none; }
@@ -152,6 +162,26 @@ details summary {
 .detailsIcon__icon {
   grid-area: 1 / 1 / 1 / 1;
   transition: opacity 150ms var(--ease-out-3);
+
+  &.-iconOpen {
+    details & {
+      opacity: 0;
+    }
+
+    details[open] & {
+      opacity: 1;
+    }
+  }
+
+  &.-iconClosed {
+    details & {
+      opacity: 1;
+    }
+
+    details[open] & {
+      opacity: 0;
+    }
+  }
 }
 
 :where(fieldset) {
