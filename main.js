@@ -38,7 +38,7 @@ function debounce(fn, delay) {
  */
 function updateStatus(data) {
     if (data.length === 0) {
-        resultsStatusElement.innerHTML = 'No results found'
+        resultsStatusElement.innerHTML = 'No results found.'
 
         return
     }
@@ -65,11 +65,21 @@ function populateData(data) {
     data.forEach(staffMember => {
         const template = `
             <li class="content__resultItem resultItem">
-                <img class="resultItem__image" src="${staffMember.avatar}" alt="Photo of ${staffMember.name}">
-                <h3 class="resultItem__name">${staffMember.name}</h3>
-                <p>${staffMember.department}</p>
-                <p>${staffMember.years} years at Imarc</p>
-                <p>${staffMember.location}</p>
+                <article class="article">
+                    <div class="article__content">
+                        <h3 class="article__name">
+                        <a href="#" class="article__link">
+                        ${staffMember.name}
+                        </a>
+                        </h3>
+                        <p>${staffMember.department}</p>
+                        <p>${staffMember.years} years at Imarc</p>
+                        <p>${staffMember.location}</p>
+                    </div>
+                    <div class="article__media">
+                        <img class="article__image" src="${staffMember.avatar}" alt="Photo of ${staffMember.name}">
+                    </div>
+                </article>
             </li>
         `
 

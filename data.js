@@ -11,7 +11,7 @@ const staffData = Array.from({ length: DATA_COUNT }, () => {
         department: DEPARTMENTS[Math.floor(Math.random()*DEPARTMENTS.length)],
         years: faker.datatype.number({ min: 1, max: 25 }),
         location: LOCATIONS[Math.floor(Math.random()*LOCATIONS.length)],
-        avatar: faker.image.avatar(),
+        avatar: faker.image.cats(800, 800, true),
     }
 })
 
