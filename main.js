@@ -1,5 +1,5 @@
 import './style.scss'
-import staffData from './data.js'
+import { staffData, DEPARTMENTS, LOCATIONS } from './data.js'
 
 
 const parser = new DOMParser()
@@ -88,6 +88,18 @@ function populateData(data) {
 
     updateStatus(data)
 }
+
+
+/**
+ * @function buildRadioInputs
+ * @param  {Array} data array of input options
+ */
+function buildRadioInputs(options) {
+    options.forEach(option => {
+
+    })
+}
+
 
 /**
  * @function filterData

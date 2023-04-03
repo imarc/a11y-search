@@ -2,8 +2,8 @@ import { faker } from '@faker-js/faker'
 
 const DATA_COUNT = 50
 
-const DEPARTMENTS = ['Engineering', 'Management', 'Creative']
-const LOCATIONS = ['Boston', 'Los Angeles', 'Denver']
+const DEPARTMENTS = ['Engineering', 'Management', 'Creative', 'Strategy']
+const LOCATIONS = ['Boston', 'Los Angeles', 'Denver', 'Orlando', 'Houston', 'Portland']
 
 const staffData = Array.from({ length: DATA_COUNT }, () => {
     return {
@@ -15,4 +15,4 @@ const staffData = Array.from({ length: DATA_COUNT }, () => {
     }
 })
 
-export default staffData
+export { staffData, DEPARTMENTS, LOCATIONS }

@@ -51,6 +51,14 @@ body {
   min-height: 100vh;
 }
 
+:where(h2) {
+  font-size: var(--font-size-fluid-2);
+}
+
+:where(h3) {
+  font-size: var(--font-size-fluid-1);
+}
+
 .sr-only {
     border: 0;
     clip: rect(0 0 0 0);
@@ -68,7 +76,7 @@ body {
     color: var(--text-1);
     display: block;
     height: 1px;
-    left: -10000px;
+    right: -10000px;
     overflow: hidden;
     padding: 0.75rem 1.5rem;
     position: absolute;
@@ -78,7 +86,7 @@ body {
 }
 
 .skip-content:focus {
-    left: 30px;
+    right: 30px;
     top: 30px;
     height: auto;
     overflow: visible;
@@ -109,6 +117,7 @@ body {
   display: grid;
   gap: var(--size-4);
   padding: var(--size-4);
+  position: relative;
 
   @media screen and (min-width: 776px) {
     grid-template-columns: minmax(10rem, 30vw) auto;

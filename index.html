@@ -33,6 +33,11 @@
             </div>
           </form>
         </header>
+
+        <a href="#results" class="skip-content">
+          Skip to Results
+        </a>
+
         <aside class="sidebar">
 
           <details open>
@@ -78,30 +83,26 @@
             </fieldset>
           </details>
 
-          <details>
-            <summary>
+          <section class="asideSection">
+            <div class="asideSection__header">
               <h3>Years at Imarc</h3>
-              <div class="detailsIcon">
-                <span class="material-icons detailsIcon__icon -iconClosed">
-                  add
-                </span>
-                <span class="material-icons detailsIcon__icon -iconOpen">
-                  remove
-                </span>
-              </div>
-            </summary>
-            <fieldset class="checkboxes" data-region="year-filters">
-              <legend class="sr-only">Filter By Years at Imarc</legend>
-              <label class="checkbox" for="three">
-                <input type="checkbox" class="checkbox__input" value="three" id="three" name="department" />
-                <span>3 Years</span>
-              </label>
-            </fieldset>
-          </details>
+            </div>
+            <div class="select" data-region="year-filters">
+              <label for="select-dropdown" class="sr-only">Filter By Years at Imarc</label>
+              <select id="select-dropdown" class="select__input">
+                <option value="null" selected disabled>Select a year range</option>
+                <option value="5">5 Years or less</option>
+                <option value="10">5 - 10 Years</option>
+                <option value="15">10 - 15 Years</option>
+                <option value="20">15 - 20 Years</option>
+                <option value="25">20+ Years</option>
+              </select>
+            </div>
+          </section>
         </aside>
         <main class="content">
           <div class="content__resultStatus" role="status"></div>
-          <ul class="content__resultsList" data-region="results-list">
+          <ul id="results" class="content__resultsList" data-region="results-list">
 
           </ul>
         </main>
