@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A11Y Search Demo</title>
+  </head>
+  <body>
+    <div id="app" class="search">
+      <header class="hero">
+        <h1>A11Y Search Demo</h1>
+      </header>
+
+      <div class="wrapper">
+        <header class="header">
+          <h2>Imarc Staff Search</h2>
+          <form class="search" role="search">
+            <div class="search__wrapper">
+              <div class="search__icon">
+                <span class="material-icons">
+                  search
+                </span>
+              </div>
+              <input type="search" class="search__input" placeholder="Search the directory...">
+            </div>
+          </form>
+        </header>
+        <aside class="sidebar">
+          <details open>
+            <summary>
+              <h3>Department</h3>
+              <div class="detailsIcon">
+                <span class="material-icons detailsIcon__icon -iconClosed">
+                  add
+                </span>
+                <span class="material-icons detailsIcon__icon -iconOpen">
+                  remove
+                </span>
+              </div>
+            </summary>
+            <fieldset class="checkboxes">
+              <legend class="sr-only">Filter By Department</legend>
+              <label class="radio" for="engineering">
+                <input type="radio" class="radio__input" value="engineering" id="engineering" name="department" />
+                <span>Engineering</span>
+              </label>
+            </fieldset>
+          </details>
+
+          <details>
+            <summary>
+              <h3>Location</h3>
+              <div class="detailsIcon">
+                <span class="material-icons detailsIcon__icon -iconClosed">
+                  add
+                </span>
+                <span class="material-icons detailsIcon__icon -iconOpen">
+                  remove
+                </span>
+              </div>
+            </summary>
+            <fieldset class="radioGroup">
+              <legend class="sr-only">Filter By Location</legend>
+              <label class="radio" for="engineering">
+                <input type="radio" class="radio__input" value="engineering" id="engineering" name="location" />
+                <span>Engineering</span>
+              </label>
+            </fieldset>
+          </details>
+
+          <details>
+            <summary>
+              <h3>Years at Imarc</h3>
+              <div class="detailsIcon">
+                <span class="material-icons detailsIcon__icon -iconClosed">
+                  add
+                </span>
+                <span class="material-icons detailsIcon__icon -iconOpen">
+                  remove
+                </span>
+              </div>
+            </summary>
+            <fieldset class="checkboxes">
+              <legend class="sr-only">Filter By Years at Imarc</legend>
+              <label class="checkbox" for="engineering">
+                <input type="checkbox" class="checkbox__input" value="engineering" id="engineering" name="department" />
+                <span>Engineering</span>
+              </label>
+            </fieldset>
+          </details>
+        </aside>
+        <main class="content">
+
+        </main>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
