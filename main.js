@@ -8,11 +8,13 @@ const parser = new DOMParser()
 const contentRegionElement = document.querySelector('[data-region="results-list"]')
 const resultsStatusElement = document.querySelector('[role="status"]')
 const searchInputElement = document.querySelector('input[type="search"]')
+const departmentRegionElement = document.querySelector('[data-region="department-filters"]')
+const locationRegionElement = document.querySelector('[data-region="location-filters"]')
 
 // state
 let currentSearchTerm = ''
-let selectedDepartment = []
-let selectedYear = null
+let selectedDepartment = null
+let selectedLocation = null
 
 
 /**
@@ -30,6 +32,26 @@ function debounce(fn, delay) {
             fn.apply(null, args)
         }, delay)
     }
+}
+
+/**
+ * @function updateState
+ */
+function updateState() {
+    const departmentInputs = departmentRegionElement.querySelectorAll('input')
+    const locationInputs = locationRegionElement.querySelectorAll('input')
+
+    departmentInputs.forEach(input => {
+        if (input.checked) {
+            selectedDepartment = input.value
+        }
+    })
+
+    locationInputs.forEach(input => {
+        if (input.checked) {
+            selectedLocation = input.value
+        }
+    })
 }
 
 /**
@@ -89,17 +111,41 @@ function populateData(data) {
     updateStatus(data)
 }
 
-
 /**
- * @function buildRadioInputs
- * @param  {Array} data array of input options
+ * @function populateInputs
  */
-function buildRadioInputs(options) {
-    options.forEach(option => {
+function populateInputs() {
+    const formTemplate = ({ value, name, type }) => (`
+        <label class="${type}" for="${value}">
+            <input type="${type}" class="${type}__input" value="${value}" id="${value}" name="${name}" />
+            <span>${value}</span>
+        </label>
+    `)
 
+    LOCATIONS.forEach(value => {
+        const element = parseTemplate(formTemplate({ value, name: 'location', type: 'radio' }))
+        const input = element.querySelector('input')
+
+        input.addEventListener('change', () => {
+            const data = filterData(staffData)
+            populateData(data)
+        })
+
+        locationRegionElement.appendChild(element)
+    })
+
+    DEPARTMENTS.forEach(value => {
+        const element = parseTemplate(formTemplate({ value, name: 'department', type: 'radio' }))
+        const input = element.querySelector('input')
+
+        input.addEventListener('change', () => {
+            const data = filterData(staffData)
+            populateData(data)
+        })
+
+        departmentRegionElement.appendChild(element)
     })
 }
-
 
 /**
  * @function filterData
@@ -109,35 +155,31 @@ function buildRadioInputs(options) {
 function filterData(data) {
     let filteredData = data
 
-    if (currentSearchTerm.length > 0) {
+    updateState()
+
+    if (currentSearchTerm.length) {
         filteredData = filteredData.filter(staffMember => {
             return staffMember.name.toLowerCase().includes(currentSearchTerm.toLowerCase())
         })
     }
 
-    if (selectedDepartment.length) {
-        filteredData = filteredData.filter(staffMember => {
-            return selectedDepartment.includes(staffMember.department)
-        })
+    if (selectedDepartment) {
+        console.log(selectedDepartment)
+        filteredData = filteredData.filter(staffMember => staffMember.department === selectedDepartment)
     }
 
-    if (selectedYear) {
-        filteredData = filteredData.filter(staffMember => {
-            return staffMember.years === selectedYear
-        })
+    if (selectedLocation) {
+        filteredData = filteredData.filter(staffMember => staffMember.location === selectedLocation)
     }
 
     return filteredData
 }
 
+populateInputs()
 populateData(staffData)
 
 searchInputElement.addEventListener('input', debounce((event) => {
     currentSearchTerm = event.target.value
-
     const data = filterData(staffData)
-
-    console.log(data)
-
     populateData(data)
 }, 500))
