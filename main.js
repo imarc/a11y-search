@@ -10,6 +10,7 @@ const resultsStatusElement = document.querySelector('[role="status"]')
 const searchInputElement = document.querySelector('input[type="search"]')
 const departmentRegionElement = document.querySelector('[data-region="department-filters"]')
 const locationRegionElement = document.querySelector('[data-region="location-filters"]')
+const clearFiltersElement = document.querySelector('[data-clear-filters]')
 
 // state
 let currentSearchTerm = ''
@@ -32,6 +33,31 @@ function debounce(fn, delay) {
             fn.apply(null, args)
         }, delay)
     }
+}
+
+/**
+ * @function updateClearButton
+ */
+function updateClearButton() {
+    !currentSearchTerm && !selectedDepartment && !selectedLocation
+        ? clearFiltersElement.setAttribute('disabled', 'true')
+        : clearFiltersElement.removeAttribute('disabled')
+}
+
+/**
+ * @function resetFilters
+ */
+function resetFilters() {
+    currentSearchTerm = ''
+    selectedDepartment = null
+    selectedLocation = null
+
+    document.querySelectorAll('input[type="radio"], input[type="checkbox"]')
+        .forEach(input => input.checked = false)
+    searchInputElement.value = null
+
+    filterData(staffData)
+    populateData(staffData)
 }
 
 /**
@@ -156,6 +182,7 @@ function filterData(data) {
     let filteredData = data
 
     updateState()
+    updateClearButton()
 
     if (currentSearchTerm.length) {
         filteredData = filteredData.filter(staffMember => {
@@ -183,3 +210,5 @@ searchInputElement.addEventListener('input', debounce((event) => {
     const data = filterData(staffData)
     populateData(data)
 }, 500))
+
+clearFiltersElement.addEventListener('click', resetFilters)

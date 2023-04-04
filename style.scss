@@ -254,6 +254,7 @@ details summary {
   border: var(--border-size-2) solid var(--surface-2);
   border-radius: var(--radius-2);
   display: flex;
+  flex-wrap: wrap;
   gap: var(--size-6);
   justify-content: space-between;
   font-size: var(--font-size-fluid-4);
