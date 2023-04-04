@@ -83,7 +83,7 @@ function updateState() {
         }
     })
 
-    selectedYears = yearsInputElement.value
+    selectedYears = yearsInputElement.value === 'null' ? null : yearsInputElement.value
 }
 
 
@@ -227,7 +227,6 @@ function filterData(data) {
     }
 
     if (selectedDepartment) {
-        console.log(selectedDepartment)
         filteredData = filteredData.filter(staffMember => staffMember.department === selectedDepartment)
     }
 
@@ -236,7 +235,8 @@ function filterData(data) {
     }
 
     if (selectedYears) {
-        const selectedYearsRange = select(YEARS, opt => opt.range, opt => opt.value == selectedYears )[0]
+        const selectedYearsRange = select(YEARS, opt => opt.range, opt => opt.value == selectedYears)[0]
+
         filteredData = filteredData.filter(staffMember => selectedYearsRange.includes(staffMember.years))
     }
 
