@@ -29,7 +29,7 @@ const YEARS = [
     {
         label: '20+ Years',
         range: [21, 22, 23, 24, 25],
-        value: '20-25'
+        value: '21-25'
     },
 ]
 
