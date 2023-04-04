@@ -184,7 +184,7 @@ body {
   background: var(--surface-1);
 }
 
-details {
+:where(details, .asideSection ) {
   box-shadow: var(--shadow-3);
 }
 
@@ -225,6 +225,10 @@ details summary {
   }
 }
 
+:where(button) {
+  --_size: var(--font-size-0);
+}
+
 :where(fieldset) {
   border: none;
 }
@@ -245,12 +249,58 @@ details summary {
   margin: 0;
 }
 
-.content__resultStatus {
+.content__header {
+  align-items: center;
   border: var(--border-size-2) solid var(--surface-2);
   border-radius: var(--radius-2);
+  display: flex;
+  gap: var(--size-6);
+  justify-content: space-between;
   font-size: var(--font-size-fluid-4);
   font-weight: var(--font-weight-6);
   padding: var(--size-4);
+}
+
+.asideSection {
+  background: var(--surface-2);
+
+  &__header {
+    background: var(--surface-3);
+    border-radius: var(--radius-2);
+    padding: var(--size-2) var(--size-3);
+  }
+}
+
+.select {
+  align-items: center;
+  display: grid;
+  padding: var(--size-4) var(--size-3);
+
+  &__input {
+    appearance: none;
+    background: var(--surface-1);
+    border: var(--border-size-1) solid var(--gray-5);
+    grid-area: 1 / 1 / 1 / 1;
+    width: 100%;
+  }
+
+  &__icon {
+    display: grid;
+    grid-area: 1 / 1 / 1 / 1;
+    justify-self: end;
+    margin: var(--size-3);
+    place-items: center;
+
+    svg {
+      height: 1.875rem;
+      width: 1.875rem;
+    }
+  }
+}
+
+:where(select) {
+  padding-block: 0.75ch;
+  padding-inline: 1.25ch 2.5rem;
 }
 
 .article {
