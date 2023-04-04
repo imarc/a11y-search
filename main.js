@@ -117,7 +117,8 @@ function populateData(data) {
                     <div class="article__content">
                         <h3 class="article__name">
                         <a href="#" class="article__link">
-                        ${staffMember.name}
+                            <span class="sr-only">Staff Bio for</span>
+                            ${staffMember.name}
                         </a>
                         </h3>
                         <p>${staffMember.department}</p>
