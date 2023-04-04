@@ -10,7 +10,6 @@ const resultsStatusElement = document.querySelector('[role="status"]')
 const searchInputElement = document.querySelector('input[type="search"]')
 const departmentRegionElement = document.querySelector('[data-region="department-filters"]')
 const locationRegionElement = document.querySelector('[data-region="location-filters"]')
-const yearsRegionElement = document.querySelector('[data-region="year-filters"]')
 const yearsInputElement = document.querySelector('select')
 const clearFiltersElement = document.querySelector('[data-clear-filters]')
 
@@ -100,6 +99,7 @@ function updateStatus(data) {
     }
 
     const html = (strings, ...values)=> String.raw({ raw: strings }, ...values)
+    // { select } [RADASH] allows you to `map` and `filter` in one function
     const selectedYearsLabel = select(YEARS, opt => opt.label, opt => opt.value == selectedYears )
     const newFilters = sift([selectedDepartment, selectedLocation, ...selectedYearsLabel])
 
