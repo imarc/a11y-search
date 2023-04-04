@@ -1,6 +1,6 @@
 import './style.scss'
-import { staffData, DEPARTMENTS, LOCATIONS } from './data.js'
-
+import { staffData, DEPARTMENTS, LOCATIONS, YEARS } from './data.js'
+import { sift, select } from 'radash'
 
 const parser = new DOMParser()
 
@@ -10,12 +10,15 @@ const resultsStatusElement = document.querySelector('[role="status"]')
 const searchInputElement = document.querySelector('input[type="search"]')
 const departmentRegionElement = document.querySelector('[data-region="department-filters"]')
 const locationRegionElement = document.querySelector('[data-region="location-filters"]')
+const yearsRegionElement = document.querySelector('[data-region="year-filters"]')
+const yearsInputElement = document.querySelector('select')
 const clearFiltersElement = document.querySelector('[data-clear-filters]')
 
 // state
 let currentSearchTerm = ''
 let selectedDepartment = null
 let selectedLocation = null
+let selectedYears = null
 
 
 /**
@@ -39,7 +42,7 @@ function debounce(fn, delay) {
  * @function updateClearButton
  */
 function updateClearButton() {
-    !currentSearchTerm && !selectedDepartment && !selectedLocation
+    !currentSearchTerm && !selectedDepartment && !selectedLocation && !selectedYears
         ? clearFiltersElement.setAttribute('disabled', 'true')
         : clearFiltersElement.removeAttribute('disabled')
 }
@@ -51,12 +54,14 @@ function resetFilters() {
     currentSearchTerm = ''
     selectedDepartment = null
     selectedLocation = null
+    selectedYears = null
 
     document.querySelectorAll('input[type="radio"], input[type="checkbox"]')
         .forEach(input => input.checked = false)
     searchInputElement.value = null
+    yearsInputElement.selectedIndex = null
 
-    filterData(staffData)
+    updateClearButton()
     populateData(staffData)
 }
 
@@ -78,12 +83,15 @@ function updateState() {
             selectedLocation = input.value
         }
     })
+
+    selectedYears = yearsInputElement.value
 }
+
 
 /**
  * @function updateStatus
  * @param  {Array} data
- */
+*/
 function updateStatus(data) {
     if (data.length === 0) {
         resultsStatusElement.innerHTML = 'No results found.'
@@ -91,7 +99,21 @@ function updateStatus(data) {
         return
     }
 
-    return resultsStatusElement.innerHTML = `${data.length} results found`
+    const html = (strings, ...values)=> String.raw({ raw: strings }, ...values)
+    const selectedYearsLabel = select(YEARS, opt => opt.label, opt => opt.value == selectedYears )
+    const newFilters = sift([selectedDepartment, selectedLocation, ...selectedYearsLabel])
+
+    let output = `${data.length} results found`
+    if (currentSearchTerm.length) {
+        output += ` for "${currentSearchTerm}"`
+    }
+    if (newFilters.length ) {
+        output += ` in`
+        newFilters.forEach(term => {
+            output += html`<span class="tag">${term}</span>`
+        })
+    }
+    return resultsStatusElement.innerHTML = output
 }
 
 /**
@@ -172,6 +194,19 @@ function populateInputs() {
 
         departmentRegionElement.appendChild(element)
     })
+
+    YEARS.forEach((option) => {
+        const element = parseTemplate(`
+            <option value="${option.value}" data-select="${option}">${option.label}</option>
+        `)
+
+        yearsInputElement.appendChild(element)
+    })
+
+    yearsInputElement.addEventListener('change', () => {
+        const data = filterData(staffData)
+        populateData(data)
+    })
 }
 
 /**
@@ -198,6 +233,11 @@ function filterData(data) {
 
     if (selectedLocation) {
         filteredData = filteredData.filter(staffMember => staffMember.location === selectedLocation)
+    }
+
+    if (selectedYears) {
+        const selectedYearsRange = select(YEARS, opt => opt.range, opt => opt.value == selectedYears )[0]
+        filteredData = filteredData.filter(staffMember => selectedYearsRange.includes(staffMember.years))
     }
 
     return filteredData

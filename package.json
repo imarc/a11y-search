@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "open-props": "^1.5.7",
+    "radash": "^10.8.1",
     "sass": "^1.60.0"
   }
 }

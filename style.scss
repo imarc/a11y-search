@@ -249,6 +249,13 @@ details summary {
   margin: 0;
 }
 
+.content__resultStatus {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
 .content__header {
   align-items: center;
   border: var(--border-size-2) solid var(--surface-2);
@@ -327,6 +334,10 @@ details summary {
 .article__content {
   grid-row: 2 / span 1;
   padding: var(--size-4);
+
+  :where(p) {
+    color: var(--text-2);
+  }
 }
 
 .article__media {
@@ -337,6 +348,7 @@ details summary {
 
 .article__link {
   color: var(--text-1);
+  font-weight: var(--font-weight-7);
 
   &::after {
     content: '';
@@ -361,4 +373,13 @@ details summary {
 
 .article__name {
   font-size: var(--font-size-fluid-1);
+}
+
+.tag {
+  background: var(--cyan-11);
+  border-radius: var(--radius-3);
+  color: var(--surface-2);
+  font-size: var(--font-size-0);
+  font-weight: var(--font-weight-7);
+  padding: var(--size-1) var(--size-2);
 }
