@@ -1,5 +1,5 @@
 import './style.scss'
-import { staffData, DEPARTMENTS, LOCATIONS, YEARS } from './data.js'
+import { STAFF_DATA, DEPARTMENTS, LOCATIONS, YEARS } from './data.js'
 import { sift, select } from 'radash'
 
 const parser = new DOMParser()
@@ -61,7 +61,7 @@ function resetFilters() {
     yearsInputElement.selectedIndex = null
 
     updateClearButton()
-    populateData(staffData)
+    populateData(STAFF_DATA)
 }
 
 /**
@@ -176,7 +176,7 @@ function populateInputs() {
         const input = element.querySelector('input')
 
         input.addEventListener('change', () => {
-            const data = filterData(staffData)
+            const data = filterData(STAFF_DATA)
             populateData(data)
         })
 
@@ -188,7 +188,7 @@ function populateInputs() {
         const input = element.querySelector('input')
 
         input.addEventListener('change', () => {
-            const data = filterData(staffData)
+            const data = filterData(STAFF_DATA)
             populateData(data)
         })
 
@@ -204,7 +204,7 @@ function populateInputs() {
     })
 
     yearsInputElement.addEventListener('change', () => {
-        const data = filterData(staffData)
+        const data = filterData(STAFF_DATA)
         populateData(data)
     })
 }
@@ -244,11 +244,11 @@ function filterData(data) {
 }
 
 populateInputs()
-populateData(staffData)
+populateData(STAFF_DATA)
 
 searchInputElement.addEventListener('input', debounce((event) => {
     currentSearchTerm = event.target.value
-    const data = filterData(staffData)
+    const data = filterData(STAFF_DATA)
     populateData(data)
 }, 500))
 
